@@ -8,8 +8,8 @@ PHEnix is a rather small team working out of Pender High School in Burgaw NC. We
 The project uses a build tool called Gradle to help assemble and deploy the code to the robot. This is, as of 2019, the standard way of working with the robot (according to FRC). If this doesn't mean anything to you don't worry. Its bundled with the code so you don't have to do anything extra.
 
 To get Started:
-1. Download this repository using (Git)[https://git-scm.com/]
-2. Download Visual Studio Code using (the guide found here)[https://wpilib.screenstepslive.com/s/currentCS/a/932382-installing-visual-studio-code-c-java]
+1. Download this repository using [Git](https://git-scm.com/)
+2. Download Visual Studio Code using [the guide found here](https://wpilib.screenstepslive.com/s/currentCS/a/932382-installing-visual-studio-code-c-java)
 3. Make sure to install the relevant plugins for Visual Studio (found on the guide)
 4. In the Upper Right corner of the screen (provided you have installed all the required plugins) there should be a hexagon shaped icon with a W in it. Click that and select the "Build Robot Code" option (you can search for it by typing that in)
 
