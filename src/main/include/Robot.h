@@ -33,7 +33,7 @@ class Robot : public frc::TimedRobot
     frc::Spark rightMotor{1};
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 
-    //Intake for "carog"
+    //Intake for "cargo"
     frc::Spark cargoMotor{2};
     
     //Cameras used for viewing at the Driver station
