@@ -36,11 +36,7 @@ class Robot : public frc::TimedRobot
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 
     //Intake for "cargo"
-<<<<<<< HEAD
     frc::Spark cargoMotor{3};
-=======
-    frc::Spark cargoMotor{2};
->>>>>>> 2ad3e25f9f78c398c667b544daf50703a7f0fad2
     
     //Cameras used for viewing at the Driver station
     //Sink is used to switch between cameras and (hopefully) save on bandwidth and latency
