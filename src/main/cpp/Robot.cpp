@@ -5,13 +5,9 @@ void Robot::RobotPeriodic()
 {
 
   //Toggle between the two cameras
-  if(cameraToggle && controller.GetRawButton(1)) {
-    camServer.SetSource(camFront);
+  if(controller.GetRawButtonPressed(1)) {
     cameraToggle = !cameraToggle;
-  }
-  if(!cameraToggle && controller.GetRawButton(1)) {
-    camServer.SetSource(camRear);
-    cameraToggle = !cameraToggle;
+    camServer.SetSource(cameraToggle ? camFront : camRear);
   }
 }
 
@@ -24,13 +20,11 @@ void Robot::TeleopPeriodic()
 }
 
 void Robot::PlayerControl() {
+  
   // Drive with arcade style controls
-  if(controller.GetRawAxis(5) > speed) {
-  speed = speed + controller.GetRawAxis(5)/16;
-  } else if(controller.GetRawAxis(5) < speed) {
-    speed = speed - controller.GetRawAxis(5)/16;
-  }
+  speed += (controller.GetRawAxis(5) - previousSpeed)/64;
   diffDrive.ArcadeDrive(-speed, controller.GetRawAxis(4) * .8);
+  previousSpeed = speed;
 
   //"Intake mode" that allows the user to set the intake running constantly until a ball is caught
   if (controller.GetRawButton(9) && (controller.GetRawAxis(2) == 0))

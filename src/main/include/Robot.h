@@ -47,7 +47,8 @@ class Robot : public frc::TimedRobot
 
     //Msc variables
     bool intakeMode = false;
-    bool cameraToggle = 0;
+    bool cameraToggle = false;
     double speed = 0;
+    double previousSpeed = 0;
 
 };
