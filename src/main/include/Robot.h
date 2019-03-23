@@ -22,6 +22,7 @@ class Robot : public frc::TimedRobot
 
     //As these are the only two classes we utilize they are the only two overridden
     void RobotPeriodic() override;
+    void RobotInit() override;
     void TeleopPeriodic() override;
     void AutonomousPeriodic() override;
     void PlayerControl();

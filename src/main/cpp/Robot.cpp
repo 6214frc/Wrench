@@ -1,6 +1,10 @@
 #include "Robot.h"
 #include <iostream>
 
+void Robot::RobotInit() {
+  
+}
+
 void Robot::RobotPeriodic() 
 {
 
@@ -22,18 +26,22 @@ void Robot::TeleopPeriodic()
 void Robot::PlayerControl() {
   
   // Drive with arcade style controls
-  speed += (controller.GetRawAxis(5) - previousSpeed)/64;
+  speed += (controller.GetRawAxis(5) - previousSpeed)/8;
   diffDrive.ArcadeDrive(-speed, controller.GetRawAxis(4) * .8);
   previousSpeed = speed;
 
   //"Intake mode" that allows the user to set the intake running constantly until a ball is caught
-  if (controller.GetRawButton(9) && (controller.GetRawAxis(2) == 0))
+  if (controller.GetRawButton(9) && (controller.GetRawAxis(2) < .02))
   {
     cargoMotor.Set(.2);
+    intakeMode = true;
   }
-  if (controller.GetRawAxis(2) > 0)
+  if (controller.GetRawAxis(2) > .02)
   {
+    intakeMode = false;
     cargoMotor.Set(controller.GetRawAxis(2));
+  } else if (!intakeMode) {
+    cargoMotor.Set(0);
   }
 }
 
