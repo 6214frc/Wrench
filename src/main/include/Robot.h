@@ -23,6 +23,8 @@ class Robot : public frc::TimedRobot
     //As these are the only two classes we utilize they are the only two overridden
     void RobotPeriodic() override;
     void TeleopPeriodic() override;
+    void AutonomousPeriodic() override;
+    void PlayerControl();
 
     private:
     //A single Xbox controller
@@ -33,8 +35,8 @@ class Robot : public frc::TimedRobot
     frc::Spark rightMotor{1};
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 
-    //Intake for "carog"
-    frc::Spark cargoMotor{2};
+    //Intake for "cargo"
+    frc::Spark cargoMotor{3};
     
     //Cameras used for viewing at the Driver station
     //Sink is used to switch between cameras and (hopefully) save on bandwidth and latency
@@ -46,5 +48,6 @@ class Robot : public frc::TimedRobot
     //Msc variables
     bool intakeMode = false;
     bool cameraToggle = 0;
+    double speed = 0;
 
 };
