@@ -11,6 +11,11 @@
 #include <frc/TimedRobot.h>
 #include <cameraserver/CameraServer.h>
 #include <frc/drive/DifferentialDrive.h>
+#include <frc/SmartDashboard/SmartDashboard.h>
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTable.h>
+
 
 /**
  * This is (a version) of FRC Team 6214's robot code for 2019
@@ -19,8 +24,6 @@
  */
 class Robot : public frc::TimedRobot
 {
-
-    //As these are the only two classes we utilize they are the only two overridden
     void RobotPeriodic() override;
     void RobotInit() override;
     void TeleopPeriodic() override;
@@ -38,7 +41,10 @@ class Robot : public frc::TimedRobot
 
     //Intake for "cargo"
     frc::Spark cargoMotor{3};
-    
+
+    //ShuffleBoard & NetworkTable entry stuffs
+    nt::NetworkTableEntry NTDriveTrain;
+
     //Cameras used for viewing at the Driver station
     //Sink is used to switch between cameras and (hopefully) save on bandwidth and latency
     //TODO: Maybe use vision processing to aid driver
@@ -49,6 +55,7 @@ class Robot : public frc::TimedRobot
     //Msc variables
     bool intakeMode = false;
     bool cameraToggle = false;
+    int speedScalingFactor = 4; // Higher the Scaling factor the slower it accelerates
     double speed = 0;
     double previousSpeed = 0;
 
