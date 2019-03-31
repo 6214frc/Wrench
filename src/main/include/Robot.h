@@ -40,10 +40,14 @@ class Robot : public frc::TimedRobot
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 
     //Intake for "cargo"
-    frc::Spark cargoMotor{3};
+    frc::Spark* cargoMotor = new frc::Spark{3};
+
+    //Hatch motor that will never run because we have 0 time
+    frc::Spark hatchMotor{2};
 
     //ShuffleBoard & NetworkTable entry stuffs
     nt::NetworkTableEntry NTDriveTrain;
+    nt::NetworkTableEntry NTIntake;
 
     //Cameras used for viewing at the Driver station
     //Sink is used to switch between cameras and (hopefully) save on bandwidth and latency

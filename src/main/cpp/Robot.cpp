@@ -9,15 +9,13 @@ void Robot::TeleopPeriodic()
   PlayerControl();
 }
 
-void Robot::RobotInit() {
-  auto NTInstance = nt::NetworkTableInstance::GetDefault();
-  auto table = NTInstance.GetTable("Something");
-   
+void Robot::RobotInit() {     
 }
 
 void Robot::RobotPeriodic() 
 {
   NTDriveTrain.SetDouble(controller.GetRawAxis(5));
+  NTIntake.SetDouble(cargoMotor->Get());
   //Toggle between the two cameras
   if(controller.GetRawButtonPressed(1)) {
     cameraToggle = !cameraToggle;
@@ -33,19 +31,26 @@ void Robot::PlayerControl() {
    * **/
   // Drive with arcade style controls
   speed += (controller.GetRawAxis(5) - previousSpeed)/speedScalingFactor;
-  diffDrive.ArcadeDrive(-speed, controller.GetRawAxis(4) * .8);
+  diffDrive.ArcadeDrive(-speed * .8, controller.GetRawAxis(4) * .7);
   previousSpeed = speed;
 
   //"Intake mode" that allows the user to set the intake running constantly until a ball is caught
   if (controller.GetRawButton(9) && (controller.GetRawAxis(2) < .02)) {
-    cargoMotor.Set(.2);
+    cargoMotor->Set(.5);
     intakeMode = true;
   }
   if (controller.GetRawAxis(2) > .02) {
     intakeMode = false;
-    cargoMotor.Set(controller.GetRawAxis(2));
+    cargoMotor->Set(controller.GetRawAxis(2));
   } else if (!intakeMode) {
-    cargoMotor.Set(0);
+    cargoMotor->Set(0);
+  }
+
+  if (controller.GetPOV() == 0){
+    hatchMotor.Set(1.0);
+  }
+  if (controller.GetPOV(180) == 180) {
+    hatchMotor.Set(-1.0);
   }
 }
 
