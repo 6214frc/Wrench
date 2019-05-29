@@ -40,7 +40,7 @@ class Robot : public frc::TimedRobot
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 
     //Intake for "cargo"
-    frc::Spark* cargoMotor = new frc::Spark{3};
+    frc::Spark cargoMotor{3};
 
     //Hatch motor that will never run because we have 0 time
     frc::Spark hatchMotor{2};
@@ -59,7 +59,7 @@ class Robot : public frc::TimedRobot
     //Msc variables
     bool intakeMode = false;
     bool cameraToggle = false;
-    int speedScalingFactor = 4; // Higher the Scaling factor the slower it accelerates
+    int speedScalingFactor = 6; // Higher the Scaling factor the slower it accelerates&decelerate
     double speed = 0;
     double previousSpeed = 0;
 
