@@ -9,7 +9,6 @@
 #include <frc/Spark.h>
 #include <frc/Joystick.h>
 #include <frc/TimedRobot.h>
-#include <cameraserver/CameraServer.h>
 #include <frc/drive/DifferentialDrive.h>
 
 /**
@@ -19,15 +18,11 @@
  */
 class Robot : public frc::TimedRobot
 {
+    void TeleopPeriodic() override{
+	    diffDrive.ArcadeDrive(controller.GetRawAxis(5), controller.GetRawAxis(4));
+    };
 
-    //As these are the only two classes we utilize they are the only two overridden
-    void RobotPeriodic() override;
-    void RobotInit() override;
-    void TeleopPeriodic() override;
-    void AutonomousPeriodic() override;
-    void PlayerControl();
-
-    private:
+   private:
     //A single Xbox controller
     frc::Joystick controller{0};
 
@@ -35,21 +30,4 @@ class Robot : public frc::TimedRobot
     frc::Spark leftMotor{0};
     frc::Spark rightMotor{1};
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
-
-    //Intake for "cargo"
-    frc::Spark cargoMotor{3};
-    
-    //Cameras used for viewing at the Driver station
-    //Sink is used to switch between cameras and (hopefully) save on bandwidth and latency
-    //TODO: Maybe use vision processing to aid driver
-    cs::UsbCamera camFront = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
-    cs::UsbCamera camRear = frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
-    cs::VideoSink camServer = frc::CameraServer::GetInstance()->GetServer();
-
-    //Msc variables
-    bool intakeMode = false;
-    bool cameraToggle = false;
-    double speed = 0;
-    double previousSpeed = 0;
-
 };
