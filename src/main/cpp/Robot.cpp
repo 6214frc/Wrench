@@ -18,7 +18,7 @@
  */
 class Robot : public frc::TimedRobot
 {
-    void TeleopPeriodic() override{
+    void TeleopPeriodic() override {
 	    diffDrive.ArcadeDrive(controller.GetRawAxis(5), controller.GetRawAxis(4));
     };
 
@@ -31,3 +31,5 @@ class Robot : public frc::TimedRobot
     frc::Spark rightMotor{1};
     frc::DifferentialDrive diffDrive{leftMotor, rightMotor};
 };
+
+int main(){return frc::StartRobot<Robot>();}
